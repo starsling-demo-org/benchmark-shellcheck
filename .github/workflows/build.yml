@@ -1,12 +1,15 @@
 name: Build ShellCheck
 
 # Run this workflow every time a new commit pushed to your repository
-on: [push, pull_request]
+on:
+  # bench-only: run on each PR into starsling/develop; no push trigger.
+  pull_request:
+    branches: [ starsling/develop ]
 
 jobs:
   package_source:
     name: Package Source Code
-    runs-on: ubuntu-latest
+    runs-on: starsling-ubuntu-26.04
     steps:
       - name: Install Dependencies
         run: |
@@ -45,7 +48,7 @@ jobs:
   run_tests:
     name: Run tests (GHC ${{ matrix.ghc }})
     needs: package_source
-    runs-on: ubuntu-latest
+    runs-on: starsling-ubuntu-26.04
     strategy:
       matrix:
         ghc: ['8.0', '8.10', '9.0.1', '9.4.7', '9.6.6', 'latest']
@@ -82,7 +85,7 @@ jobs:
     strategy:
       matrix:
         build: [linux.x86_64, linux.aarch64, linux.armv6hf, linux.riscv64, darwin.x86_64, darwin.aarch64, windows.x86_64]
-    runs-on: ubuntu-latest
+    runs-on: starsling-ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -108,7 +111,7 @@ jobs:
   package_binary:
     name: Package Binaries
     needs: build_source
-    runs-on: ubuntu-latest
+    runs-on: starsling-ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -147,7 +150,7 @@ jobs:
     if: github.event_name == 'push'
     name: Deploy binaries
     needs: package_binary
-    runs-on: ubuntu-latest
+    runs-on: starsling-ubuntu-26.04
     environment: Deploy
     steps:
       - name: Install Dependencies
