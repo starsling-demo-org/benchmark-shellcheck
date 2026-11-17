@@ -1,0 +1,33 @@
+#!/bin/sh
+# Same steps as ./build, but /scratch/dist-newstyle is a directory that survives between runs
+# (run_builder mounts it from $BUILD_CACHE), so cabal/GHC only recompile the modules that changed.
+set -xe
+mkdir -p /scratch && cd /scratch
+{
+  tar xzv --strip-components=1
+  cp /etc/cabal.project.freeze .
+  chmod +x striptests && ./striptests
+  mkdir "$TARGETNAME"
+
+  # GHC 9.0 decides what to recompile from file modification times, and tar/striptests just gave every
+  # file a fresh one. Files whose content equals the previous run's get an old mtime again; changed or
+  # new files keep "now", so exactly those are recompiled (and what imports them, per GHC's interface hashes).
+  manifest=dist-newstyle/.source-sha1
+  find . -path ./dist-newstyle -prune -o -type f -print | sort | xargs sha1sum > /tmp/source-sha1
+  if [ -f "$manifest" ]
+  then
+    awk 'NR == FNR { old[$2] = $1; next } old[$2] == $1 { print $2 }' "$manifest" /tmp/source-sha1 |
+      xargs touch -d 2001-01-01
+  fi
+
+  # This script does not cabal update because compiling anything new is slow
+  ( IFS=';'; cabal build $CABALOPTS --enable-executable-static )
+  cp /tmp/source-sha1 "$manifest"
+  # copy, not mv, so the cached build tree stays complete
+  find dist-newstyle -name shellcheck -type f -exec cp {} "$TARGETNAME/" \;
+  ls -l "$TARGETNAME"
+  strip -s "$TARGETNAME/shellcheck"
+  ls -l "$TARGETNAME"
+  "$TARGETNAME/shellcheck" --version
+} >&2
+tar czv "$TARGETNAME"

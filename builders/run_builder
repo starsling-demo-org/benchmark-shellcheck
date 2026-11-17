@@ -26,5 +26,14 @@ do
     exit 2
   fi
 
-  docker run -i "$(< "$tagfile")" < "$file" | tar xz
+  extra=()
+  if [ -n "$BUILD_CACHE" ] && [ -e "$dir/build.incremental" ]
+  then
+    # Keep the build tree between runs: use build.incremental and mount the cache as dist-newstyle
+    mkdir -p "$BUILD_CACHE/$(basename "$dir")"
+    extra=(-v "$(realpath "$dir")/build.incremental:/chroot/bin/build:ro"
+           -v "$(realpath "$BUILD_CACHE/$(basename "$dir")"):/chroot/scratch/dist-newstyle")
+  fi
+
+  docker run -i "${extra[@]}" "$(< "$tagfile")" < "$file" | tar xz
 done

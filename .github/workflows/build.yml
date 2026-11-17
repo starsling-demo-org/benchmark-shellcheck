@@ -96,11 +96,23 @@ jobs:
           name: source
           path: source/
 
+      - name: Restore the armv6hf build tree
+        if: matrix.build == 'linux.armv6hf'
+        uses: actions/cache@v5
+        with:
+          path: .build-cache
+          key: shellcheck-armv6hf-build-${{ github.sha }}
+          restore-keys: shellcheck-armv6hf-build-
+
       - name: Build source
+        env:
+          BUILD_CACHE: ${{ matrix.build == 'linux.armv6hf' && format('{0}/.build-cache', github.workspace) || '' }}
         run: |
           mkdir -p bin
           mkdir -p bin/${{matrix.build}}
           ( cd bin && ../builders/run_builder ../source/source.tar.gz ../builders/${{matrix.build}} )
+          # the build ran as root inside docker: hand the cache back to the runner user so it can be saved
+          if [ -d .build-cache ]; then sudo chown -R "$(id -u):$(id -g)" .build-cache; fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
