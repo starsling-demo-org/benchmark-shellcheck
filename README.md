@@ -46,7 +46,7 @@ GitHub-hosted jobs run on the explicit GitHub larger-runner label shown, pinned 
 - [x] **Same checks, same results:** the same 14 checks ran and passed in every counted sample, warm and cold
 - [x] **Cache state verified** for every sample
 - [x] **Both runner configurations measured**, warm and cold
-- [x] **All requested samples finished** (20 of 20; 2 samples were voided and re-run, see Method)
+- [x] **All requested samples finished** (20 of 20; 3 samples were replaced and re-run, see Method)
 - [x] **At least 5 rounds** (5 requested, warm and cold)
 - [x] **No interference:** no other workflow run overlapped a sample
 - [x] **Cost neutral:** the agent PR adds no parallel jobs that spend the freed runner time
@@ -139,7 +139,7 @@ Each cell is the whole wait for that merge and links to its run.
 6. **Check.** Replays are compared job by job with upstream's own run for the same commit, and every sample's test verdicts, coverage and cache restores are read from its own job logs.
 
 - **Control configuration.** For the agent PR's own check, StarSling Runners also ran the CI unchanged; those samples are not in the Results.
-- **Default branch.** The default branch is `master`.
+- **Default branch.** Upstream's default branch is `master`.
 - **Workflows in this merge.** The replayed merge runs `build.yml` (package the source, test under six GHC versions, build seven targets, package the binaries). Upstream's other workflow, `distrotest.yaml`, runs only on a release, a schedule or a manual dispatch, so it does not run here. The ARM, macOS, Windows and RISC-V binaries are cross-built inside Docker on the x64 Linux runners, so no job runs on other hardware; the `linux.armv6hf` build runs in an emulated (qemu) chroot in every configuration.
 - **Lanes.** Samples ran concurrently, each in its own cache scope (one separate copy of this repository per lane, with the same branches, events and payloads); 14 samples came from an earlier sequential run of the same configuration. The other 6 samples, all warm, ran in the lanes: GitHub-hosted runners rounds 4 and 5, and StarSling Runners (with agents) rounds 2 to 5. Those copies are not public, so samples that ran in them appear in the sample table without a run link.
 - **Bench-only changes, identical in every configuration and never part of the agent PR:**
@@ -155,7 +155,7 @@ Each cell is the whole wait for that merge and links to its run.
 - **Runner sizes.** Upstream's `ubuntu-latest` jobs run on GitHub `ubuntu-26.04-4core` (4 vCPU, 16 GiB) and StarSling `starsling-ubuntu-26.04` (4 vCPU, 16 GiB). StarSling's 4 vCPU runners can burst to 5 vCPU and 32 GB RAM (Afterburner); GitHub's 4-core runners have 16 GB. Every job in this merge runs on those labels.
 - **Upstream reference (context only; not like-for-like; not the headline).** What upstream sees today: a median 34.8 min per merge to the default branch on upstream's own GitHub runners (n=12, most recent comparable merges to the default branch within the last 60 days; standard runners, warm caches, many commits; not a like-for-like replay).
 
-- **Failed or re-run samples** (replaced, not in the medians): GitHub-hosted runners: 0; StarSling Runners (with agents): 2; the agent PR's own check: 2.
+- **Failed or re-run samples** (replaced, not in the medians): GitHub-hosted runners: 0; StarSling Runners (with agents): 3 (2 voided for storage, 1 that never finished and left no record); the agent PR's own check: 2.
 
 </details>
 
