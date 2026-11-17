@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "upstream": {
+    "repository": "koalaman/shellcheck",
+    "commitSha": "1046c00b61516a64f85a45e5fbdc69c6c1654eb5",
+    "defaultBranch": "master"
+  },
+  "benchmarkRepository": {
+    "repository": "starsling-demo-org/benchmark-shellcheck",
+    "controlBranch": "bench/control",
+    "defaultBranch": "main",
+    "replayBranch": "master",
+    "replayHistory": "upstream"
+  },
+  "scenarios": {
+    "main-push": {
+      "name": "main-push",
+      "description": "Merge of 1046c00b6151 to master",
+      "event": "push",
+      "main": {
+        "branch": "master",
+        "beforeSha": "2c5668bac4dabd53afe57b4faa60b7054cd064bb",
+        "afterSha": "1046c00b61516a64f85a45e5fbdc69c6c1654eb5",
+        "changedPaths": [
+          "shellcheck.1.md"
+        ]
+      },
+      "referenceRuns": [
+        {
+          "workflowPath": ".github/workflows/build.yml",
+          "runId": 42545866428,
+          "attempt": 1,
+          "htmlUrl": "https://github.com/koalaman/shellcheck/actions/runs/42545866428"
+        }
+      ]
+    },
+    "seed-parent": {
+      "name": "seed-parent",
+      "role": "seed",
+      "description": "Warm seed: the previous push (2c5668bac4da onto 5d6a0bb1ec95)",
+      "event": "push",
+      "main": {
+        "branch": "master",
+        "beforeSha": "5d6a0bb1ec953dee8ed45e11f9c891eb2702bbc8",
+        "afterSha": "2c5668bac4dabd53afe57b4faa60b7054cd064bb",
+        "changedPaths": [
+          "src/ShellCheck/Analytics.hs"
+        ]
+      },
+      "referenceRuns": []
+    }
+  },
+  "patches": [
+    {
+      "id": "stack-0",
+      "source": "local",
+      "pathOrUrl": "patches/stack-0.patch",
+      "description": "levers stacked in order: 01-armv6hf-incremental-cache"
+    }
+  ],
+  "runnerMapping": {
+    "defaultMap": {
+      "ubuntu-latest": {
+        "github": "ubuntu-26.04-4core",
+        "starsling": "starsling-ubuntu-26.04"
+      },
+      "ubuntu-24.04": {
+        "starsling": "starsling-ubuntu-24.04"
+      },
+      "ubuntu-26.04": {
+        "starsling": "starsling-ubuntu-26.04"
+      },
+      "ubuntu-slim": {
+        "starsling": "starsling-ubuntu-24.04-2"
+      }
+    },
+    "runnerSpecs": {
+      "ubuntu-latest": {
+        "label": "ubuntu-latest",
+        "provider": "github",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "ubuntu-24.04": {
+        "label": "ubuntu-24.04",
+        "provider": "github",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "ubuntu-26.04": {
+        "label": "ubuntu-26.04",
+        "provider": "github",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "ubuntu-slim": {
+        "label": "ubuntu-slim",
+        "provider": "github",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 1,
+        "ramGiB": 5
+      },
+      "starsling-ubuntu-24.04-2": {
+        "label": "starsling-ubuntu-24.04-2",
+        "provider": "starsling",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 2,
+        "ramGiB": 8
+      },
+      "starsling-ubuntu-24.04": {
+        "label": "starsling-ubuntu-24.04",
+        "provider": "starsling",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "starsling-ubuntu-26.04": {
+        "label": "starsling-ubuntu-26.04",
+        "provider": "starsling",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "macos-latest": {
+        "label": "macos-latest",
+        "provider": "github",
+        "os": "macos",
+        "arch": "arm64",
+        "vcpu": 3,
+        "ramGiB": 7
+      },
+      "windows-latest": {
+        "label": "windows-latest",
+        "provider": "github",
+        "os": "windows",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      },
+      "ubuntu-26.04-4core": {
+        "label": "ubuntu-26.04-4core",
+        "provider": "github",
+        "os": "linux",
+        "arch": "x64",
+        "vcpu": 4,
+        "ramGiB": 16
+      }
+    }
+  },
+  "profiles": {
+    "cold": {
+      "name": "cold",
+      "actionsCache": "cold",
+      "crossRunArtifacts": "none",
+      "restoreExpectations": {},
+      "testResultReuseAllowed": false
+    },
+    "warm": {
+      "name": "warm",
+      "actionsCache": "warm",
+      "crossRunArtifacts": "seeded",
+      "seedScenario": "seed-parent",
+      "restoreExpectations": {},
+      "testResultReuseAllowed": true,
+      "amortizationHorizonRuns": 10
+    }
+  },
+  "adaptations": [
+    {
+      "id": "setgitversion-describe-fallback",
+      "kind": "environment-gap",
+      "workflowFile": "setgitversion",
+      "fromPattern": "version=$(git describe)",
+      "toReplacement": "version=$(git describe --tags --always)",
+      "expectedMatches": 1,
+      "reason": "The benchmark repository has no upstream tags, so `git describe` fails under `set -e` and package_source stops. Not needed if upstream tags are pushed to the benchmark repository.",
+      "blocksFullParity": false
+    },
+    {
+      "id": "no-deploy",
+      "kind": "deployment-guard",
+      "workflowFile": ".github/workflows/build.yml",
+      "jobId": "deploy",
+      "fromPattern": "github.event_name == 'push'",
+      "toReplacement": "false && github.event_name == 'push'",
+      "expectedMatches": 1,
+      "reason": "build.yml job deploy (environment Deploy): creates GitHub releases with the token, sleeps 300 s and pushes images to Docker Hub with secrets that do not exist here. Upstream's if: kept, 'false &&' in front, so it is off in every configuration. Known parity difference: the replay does not include deploy or its 5-minute sleep",
+      "blocksFullParity": true
+    },
+    {
+      "id": "secret-gate-docker-username",
+      "kind": "secret-gate-annotation",
+      "workflowFile": ".github/workflows/build.yml",
+      "jobId": "deploy",
+      "fromPattern": "${{ secrets.DOCKER_USERNAME }}",
+      "toReplacement": "",
+      "expectedMatches": 2,
+      "reason": "DOCKER_USERNAME does not exist in the benchmark org; only the deploy job reads it, and no-deploy turns that job off. The reference is removed so no configuration reads it.",
+      "blocksFullParity": false
+    },
+    {
+      "id": "secret-gate-docker-password",
+      "kind": "secret-gate-annotation",
+      "workflowFile": ".github/workflows/build.yml",
+      "jobId": "deploy",
+      "fromPattern": "${{ secrets.DOCKER_PASSWORD }}",
+      "toReplacement": "",
+      "expectedMatches": 1,
+      "reason": "DOCKER_PASSWORD does not exist in the benchmark org; only the deploy job reads it, and no-deploy turns that job off. The reference is removed so no configuration reads it.",
+      "blocksFullParity": false
+    },
+    {
+      "id": "secret-gate-docker-email",
+      "kind": "secret-gate-annotation",
+      "workflowFile": ".github/workflows/build.yml",
+      "jobId": "deploy",
+      "fromPattern": "${{ secrets.DOCKER_EMAIL }}",
+      "toReplacement": "",
+      "expectedMatches": 1,
+      "reason": "DOCKER_EMAIL does not exist in the benchmark org; only the deploy job reads it, and no-deploy turns that job off. The reference is removed so no configuration reads it.",
+      "blocksFullParity": false
+    }
+  ],
+  "collectors": [],
+  "execution": {
+    "repetitions": 5,
+    "timeoutMinutes": 60,
+    "maxConcurrentExperiments": 1,
+    "pollIntervalSeconds": 15,
+    "apiBudgetPerHour": 252,
+    "maxJobQueueSeconds": 30,
+    "publicRepoGitHubFree": true,
+    "commitIdentity": {
+      "name": "starsling-dev",
+      "email": "290538643+starsling-dev@users.noreply.github.com"
+    }
+  },
+  "instrumentation": true
+}

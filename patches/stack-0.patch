@@ -1,0 +1,87 @@
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+index f018e54..c1b7401 100644
+--- a/.github/workflows/build.yml
++++ b/.github/workflows/build.yml
+@@ -96,11 +96,23 @@ jobs:
+           name: source
+           path: source/
+ 
++      - name: Restore the armv6hf build tree
++        if: matrix.build == 'linux.armv6hf'
++        uses: actions/cache@v5
++        with:
++          path: .build-cache
++          key: shellcheck-armv6hf-build-${{ github.sha }}
++          restore-keys: shellcheck-armv6hf-build-
++
+       - name: Build source
++        env:
++          BUILD_CACHE: ${{ matrix.build == 'linux.armv6hf' && format('{0}/.build-cache', github.workspace) || '' }}
+         run: |
+           mkdir -p bin
+           mkdir -p bin/${{matrix.build}}
+           ( cd bin && ../builders/run_builder ../source/source.tar.gz ../builders/${{matrix.build}} )
++          # the build ran as root inside docker: hand the cache back to the runner user so it can be saved
++          if [ -d .build-cache ]; then sudo chown -R "$(id -u):$(id -g)" .build-cache; fi
+ 
+       - name: Upload artifact
+         uses: actions/upload-artifact@v7
+diff --git a/builders/linux.armv6hf/build.incremental b/builders/linux.armv6hf/build.incremental
+new file mode 100755
+index 0000000..64444e3
+--- /dev/null
++++ b/builders/linux.armv6hf/build.incremental
+@@ -0,0 +1,33 @@
++#!/bin/sh
++# Same steps as ./build, but /scratch/dist-newstyle is a directory that survives between runs
++# (run_builder mounts it from $BUILD_CACHE), so cabal/GHC only recompile the modules that changed.
++set -xe
++mkdir -p /scratch && cd /scratch
++{
++  tar xzv --strip-components=1
++  cp /etc/cabal.project.freeze .
++  chmod +x striptests && ./striptests
++  mkdir "$TARGETNAME"
++
++  # GHC 9.0 decides what to recompile from file modification times, and tar/striptests just gave every
++  # file a fresh one. Files whose content equals the previous run's get an old mtime again; changed or
++  # new files keep "now", so exactly those are recompiled (and what imports them, per GHC's interface hashes).
++  manifest=dist-newstyle/.source-sha1
++  find . -path ./dist-newstyle -prune -o -type f -print | sort | xargs sha1sum > /tmp/source-sha1
++  if [ -f "$manifest" ]
++  then
++    awk 'NR == FNR { old[$2] = $1; next } old[$2] == $1 { print $2 }' "$manifest" /tmp/source-sha1 |
++      xargs touch -d 2001-01-01
++  fi
++
++  # This script does not cabal update because compiling anything new is slow
++  ( IFS=';'; cabal build $CABALOPTS --enable-executable-static )
++  cp /tmp/source-sha1 "$manifest"
++  # copy, not mv, so the cached build tree stays complete
++  find dist-newstyle -name shellcheck -type f -exec cp {} "$TARGETNAME/" \;
++  ls -l "$TARGETNAME"
++  strip -s "$TARGETNAME/shellcheck"
++  ls -l "$TARGETNAME"
++  "$TARGETNAME/shellcheck" --version
++} >&2
++tar czv "$TARGETNAME"
+diff --git a/builders/run_builder b/builders/run_builder
+index d6de27b..f7d51a9 100755
+--- a/builders/run_builder
++++ b/builders/run_builder
+@@ -26,5 +26,14 @@ do
+     exit 2
+   fi
+ 
+-  docker run -i "$(< "$tagfile")" < "$file" | tar xz
++  extra=()
++  if [ -n "$BUILD_CACHE" ] && [ -e "$dir/build.incremental" ]
++  then
++    # Keep the build tree between runs: use build.incremental and mount the cache as dist-newstyle
++    mkdir -p "$BUILD_CACHE/$(basename "$dir")"
++    extra=(-v "$(realpath "$dir")/build.incremental:/chroot/bin/build:ro"
++           -v "$(realpath "$BUILD_CACHE/$(basename "$dir")"):/chroot/scratch/dist-newstyle")
++  fi
++
++  docker run -i "${extra[@]}" "$(< "$tagfile")" < "$file" | tar xz
+ done
