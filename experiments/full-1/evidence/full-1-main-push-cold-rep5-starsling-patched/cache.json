@@ -1,0 +1,13 @@
+{
+  "cacheEvents": [
+    {
+      "cacheKey": "shellcheck-armv6hf-build-b609bead6b1bfdd16a260a636aa6989693811f11",
+      "requestedRestoreKeys": [
+        "shellcheck-armv6hf-build-"
+      ],
+      "matchedKey": null,
+      "hitKind": "miss",
+      "sourceRef": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "sampleId": "full-1-main-push-cold-rep2-github-baseline",
+  "scenarioName": "main-push",
+  "profileName": "cold",
+  "variant": "github-baseline",
+  "repetition": 2,
+  "event": "push",
+  "dispatchedAt": "2026-11-16T07:20:40.080Z",
+  "headSha": "b275c611b687775777f6b6c015080a19bc25d863",
+  "targetBranch": "master",
+  "defaultBranch": "main"
+}

@@ -1,0 +1,55 @@
+{
+  "experimentId": "diag-1",
+  "sampleId": "diag-1-main-push-cold-rep1-github-baseline",
+  "scenarioName": "main-push",
+  "variant": "github-baseline",
+  "profileName": "cold",
+  "currentStep": "completed",
+  "completedSteps": [
+    "1_acquire_lease",
+    "2_register_placeholders",
+    "3_disable_workflows_and_reset_refs",
+    "4_install_and_verify_trees",
+    "5_enable_scenario_workflows",
+    "6_trigger_event",
+    "7_await_downstream_completion"
+  ],
+  "controlBranch": "bench/control",
+  "defaultBranch": "main",
+  "benchmarkOwnedRefs": [
+    "refs/heads/master",
+    "refs/heads/main",
+    "refs/heads/bench/pr/main-push/head"
+  ],
+  "previousBenchmarkRefs": {
+    "refs/heads/master": null,
+    "refs/heads/main": "214af0360fdc69bee98f3d6105b910e3a7acd365",
+    "refs/heads/bench/pr/main-push/head": null
+  },
+  "observedUnrelatedRefs": {
+    "refs/heads/bench/control": "12be7aa54c695d76a672926bae4c193079d65495",
+    "refs/heads/starsling/develop": "ad11d7a65cefa8d7fc90d2ea4ac905a1d2ddead7"
+  },
+  "registeredPlaceholderWorkflows": [
+    ".github/workflows/build.yml",
+    ".github/workflows/distrotest.yaml"
+  ],
+  "disabledWorkflows": [
+    ".github/workflows/build.yml",
+    ".github/workflows/distrotest.yaml"
+  ],
+  "enabledWorkflows": [
+    ".github/workflows/build.yml"
+  ],
+  "updatedAt": "2026-11-16T03:07:21.820Z",
+  "leaseAcquiredAt": "2026-11-16T02:40:04.686Z",
+  "leaseHolder": "diag-1:diag-1-main-push-cold-rep1-github-baseline",
+  "installedTreeHash": "617928006af907053e1b24c169c2f5544ac65a6b2dda41d8a91e325e874728a4",
+  "dispatchRecord": {
+    "idempotencyKey": "diag-1:diag-1-main-push-cold-rep1-github-baseline:main-push:github-baseline",
+    "dispatchedAt": "2026-11-16T02:44:20.479Z",
+    "event": "push",
+    "targetRef": "refs/heads/master",
+    "headSha": "b275c611b687775777f6b6c015080a19bc25d863"
+  }
+}

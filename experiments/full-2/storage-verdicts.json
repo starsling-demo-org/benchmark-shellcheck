@@ -1,0 +1,142 @@
+{
+ "at": "2026-11-17T02:09:03.185Z",
+ "switchAt": "2026-11-16T17:25:00.000Z",
+ "rule": "owner 2026-11-16 12:46 PST: StarSling samples count only with the RAM disk (tmpfs) on every StarSling runner",
+ "verdicts": {
+  "full-2-main-push-cold-rep1-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep1-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep1-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep2-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep2-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep2-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep3-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep3-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep3-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep4-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep4-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep4-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep5-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep5-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-cold-rep5-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-starsling-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-starsling-patched": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-starsling-baseline-retry1": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-starsling-patched-retry1": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-github-baseline": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-starsling-baseline-retry1": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-starsling-patched-retry1": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-github-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep1-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-github-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep2-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-github-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep5-github-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep4-github-baseline-seed": {
+   "ok": true
+  },
+  "full-2-main-push-warm-rep3-starsling-baseline-seed": {
+   "ok": true
+  }
+ }
+}

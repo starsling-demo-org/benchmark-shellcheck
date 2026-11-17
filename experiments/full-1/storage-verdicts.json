@@ -1,0 +1,119 @@
+{
+ "at": "2026-11-17T02:09:03.179Z",
+ "switchAt": "2026-11-16T17:25:00.000Z",
+ "rule": "owner 2026-11-16 12:46 PST: StarSling samples count only with the RAM disk (tmpfs) on every StarSling runner",
+ "verdicts": {
+  "full-1-main-push-cold-rep1-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep1-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep1-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep2-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep2-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep2-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep3-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep3-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep3-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep4-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep4-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep4-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep5-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep5-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-cold-rep5-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep1-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep1-starsling-patched": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep1-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-starsling-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-starsling-patched": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep3-github-baseline": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep3-starsling-baseline": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-7ff30845b82a42088cfb342c8e6440b4: storage unknown after the switch; starsling-z-d586ed036a1e4292a5650d252fdb1b72: storage unknown after the switch; starsling-z-d21c2f76c248433982a88f4b2adb5e3a: storage unknown after the switch; starsling-z-b6bc4bd903b440e9b69244c77fc6436f: storage unknown after the switch; starsling-z-ccb0a6afc96242d587ae8fb8165e4757: storage unknown after the switch; starsling-z-ec7cd20f5a224411a425eec39ee930c7: storage unknown after the switch; starsling-z-21d8922995e4478383cedad7f9778008: storage unknown after the switch; starsling-z-b89af8fc458644fba073db845e59b998: storage unknown after the switch; starsling-z-992db0a6246c4d5fa77927e50cbc9607: storage unknown after the switch; starsling-z-f0017f4a759e40fc92b029917f5afac4: storage unknown after the switch; starsling-z-96a86faeb4474641af8f70d359f6d0ff: storage unknown after the switch; starsling-z-261ed670247b46d79d40b693c48492db: storage unknown after the switch; starsling-z-48d1d6eaf4264fe3a518fbb1b0fa556e: storage unknown after the switch; starsling-z-af6520715a22456d83023dd24ce9051b: storage unknown after the switch; starsling-z-ce0e2d875334444c8d794f7d681ff5a3: storage unknown after the switch; undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep3-starsling-patched": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-7870d79bcf6d4d80bc0091828f4d80f0: storage unknown after the switch; starsling-z-e87896386a854ba0a26b2b4a763a6308: storage unknown after the switch; starsling-z-4cd94f9950ef40129078495a598de493: storage unknown after the switch; starsling-z-ef8694db61c7471c99783dc5fe7becb1: storage unknown after the switch; starsling-z-82d7988b62c7412cb0b428a0bd79d02c: storage unknown after the switch; starsling-z-b310d4da7625419aaf66b66ae93f5c32: storage unknown after the switch; starsling-z-4947457db2ba4a63a13f156331804cca: storage unknown after the switch; starsling-z-0c40a86538584a2c9ac93fb1a62b3148: storage unknown after the switch; starsling-z-92b4b88c21c84a40bcfee662c9c70e03: storage unknown after the switch; starsling-z-5d71deb86a1f45d4bb0fc2778730c22a: storage unknown after the switch; starsling-z-e1f25348cafe4ff3992153d9436c2bed: storage unknown after the switch; starsling-z-0166f367495940a0a25f8575820e7737: storage unknown after the switch; starsling-z-d6abc1ab151f4087bf41398d9936b4f1: storage unknown after the switch; starsling-z-d62d7785263244a8863a845f989b709c: storage unknown after the switch; starsling-z-2d62fe76675a4cd4912887024f5f25ad: storage unknown after the switch; undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep4-starsling-baseline": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-2a99df17336e4a11a501c18a6b78603d: storage unknown after the switch; starsling-z-68fa184bee384f48978b0792246094bc: storage unknown after the switch; starsling-z-8458ed5da71049d5a7966e6a953303a7: disk; starsling-z-019fc639b7314297891f5fc136766abe: storage unknown after the switch; starsling-z-74179ee8d9da45a5a925bf03e83b2e69: disk; starsling-z-e339155202574c9db9f20198afa3f005: storage unknown after the switch; starsling-z-c8bdfac647d14c9faff8bb56462a6e77: storage unknown after the switch; starsling-z-9130b6f49a1d4d31aee5d62c8a58a04f: storage unknown after the switch; starsling-z-145afd71d1974fcdba895b1085251150: disk; starsling-z-ec31e54bd96349c79fd3393967bb743d: disk; starsling-z-95eee07046104a8090a58656bd1435cc: storage unknown after the switch; starsling-z-af57bde0bf9d494e9d361fd8716ab2e7: disk; starsling-z-9ac94f6c631f4a73880cd9d651316aea: storage unknown after the switch; starsling-z-27e20bbf96f6423aa2f99a438cfb24ba: storage unknown after the switch; undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep1-github-baseline-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep1-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep1-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-starsling-baseline-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-github-baseline-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep2-starsling-patched-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep3-github-baseline-seed": {
+   "ok": true
+  },
+  "full-1-main-push-warm-rep3-starsling-baseline-seed": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-34a7120091274503a9fbda9d71b4edc1: storage unknown after the switch; starsling-z-b7071ad131eb47f3ac2ed170918bdf4f: storage unknown after the switch; starsling-z-36ff10d06cfb44a9a878ac5f40ec29be: storage unknown after the switch; starsling-z-228171d104dd4f2aa3c3e32e1ecf4d2c: storage unknown after the switch; starsling-z-dfe38b2ef9364fd596c1fb6322691184: storage unknown after the switch; starsling-z-4a292bac3d434f1eb1a1cfe8d81f06df: storage unknown after the switch; starsling-z-60c4d04e22c34c2aa0aa181903936b75: storage unknown after the switch; starsling-z-ede844fd0a054bf99f14b2010949b86a: storage unknown after the switch; starsling-z-10c5fa4823654da4a141e7cfd789427d: storage unknown after the switch; starsling-z-c8bf172d7bc14508b470625ec5108967: storage unknown after the switch; starsling-z-75b29b1c325a4d3da582e3d6afac6376: storage unknown after the switch; starsling-z-783e9e7992114333ac6bc567c6e1013d: storage unknown after the switch; starsling-z-c8e16445937f486083a3079652b10c45: storage unknown after the switch; starsling-z-c671e3fb36d7418ca3105bd9c7eb3029: storage unknown after the switch; starsling-z-be82822f62a746419b29bdb8e1ea4d93: storage unknown after the switch; undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep3-starsling-patched-seed": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-bbc3cee748ba4be491d1062924e9331e: storage unknown after the switch; starsling-z-dfdb9fc2317045528e31471853c2af5a: storage unknown after the switch; starsling-z-56015dfd96ec4b9d82759ae2577a0b57: storage unknown after the switch; starsling-z-1165e53310e945f8b6b8e5911a2f4413: storage unknown after the switch; starsling-z-8d8a1af86da04b8c94c7095475965024: storage unknown after the switch; starsling-z-bb3aff5ea617499ab2940175f2b0fda6: storage unknown after the switch; starsling-z-352ae1e0e7e2466c9ffb0cae2246cdf6: storage unknown after the switch; starsling-z-e228c4cd710648eea6d9009bb5b98a92: storage unknown after the switch; starsling-z-bcdb31a0396f44dea16a02123809ed35: storage unknown after the switch; starsling-z-edca1bc0e02c423b8b4a3ade5921ec2e: storage unknown after the switch; starsling-z-179c210828e94361964d5bab0bcc3cab: storage unknown after the switch; starsling-z-b6b3df180f124453901838f4ca796243: storage unknown after the switch; starsling-z-7748dfcff5194660976e522f0ec19642: storage unknown after the switch; starsling-z-792a6e2573674b32bc3870192c84f81c: storage unknown after the switch; starsling-z-c6fd800a811e4eaabb62f5216ef08a2f: storage unknown after the switch; undefined: storage unknown after the switch)"
+  },
+  "full-1-main-push-warm-rep4-starsling-baseline-seed": {
+   "ok": false,
+   "reason": "StarSling runner without RAM disk (starsling-z-8072a75088774dad9ed841d50d0f6d9b: storage unknown after the switch; starsling-z-70ad880ea6204b668268339163a617ce: storage unknown after the switch; starsling-z-762e6cc2297644a7a52db6032e67fa9d: storage unknown after the switch; starsling-z-4adb69e13ad540a39b46c917f6c50654: storage unknown after the switch; starsling-z-43a7fb0b1287434bb8ef73e8fdf9384c: storage unknown after the switch; starsling-z-f36c6692d878431b8f4d3846b77a3336: storage unknown after the switch; starsling-z-e13c6eaba19541abbb83b2cf4c40a9f8: storage unknown after the switch; starsling-z-2b7b17969f66429dbf65fd23e074474a: storage unknown after the switch; starsling-z-271528d883164d149d300e45c89535a0: storage unknown after the switch; starsling-z-e3eb216bf34f4351808c2b3765f384aa: storage unknown after the switch; starsling-z-a98687b293ce47aebf2800101326e826: storage unknown after the switch; starsling-z-cca96101c3994c258c5f1e0da2ff6d38: storage unknown after the switch; starsling-z-2af9192128e84adf8e9fa51bd4b890dc: storage unknown after the switch; starsling-z-5dccf211c0ae49aeb0bec33e9d03e00b: storage unknown after the switch; starsling-z-042fd628d6d64a559b30ff11bde114ea: storage unknown after the switch; undefined: storage unknown after the switch)"
+  }
+ }
+}
